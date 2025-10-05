@@ -26,4 +26,4 @@
 
 [Thanks goes to these contributors](https://github.com/cybersecurity-dev/Python-Toolkit/graphs/contributors)!
 
-[🔼 Back to top](#Python-Programming-Toolkit-)
+[🔼 Back to top](#python-development-toolkit)
