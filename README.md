@@ -22,6 +22,35 @@
     <img src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/bar.gif">
 </p>
 
+##
+
+### Interacting with the OS
+* os
+* sys
+
+### Interacting with Files
+* os.path
+* pathlib
+* shutil
+* fileinput
+* tempfile
+
+### Command line arguments & Configuration Files
+* argparse
+* configparser
+
+### Compressing & Decompressing Files
+* gzip
+
+### Running & Communicating with other Processes
+* subprocess
+
+### Running Remote Commands
+
+* [Paramiko](https://github.com/paramiko/paramiko) - [Paramiko](https://www.paramiko.org/) is a pure-Python implementation of the SSHv2 protocol, providing both client and server functionality.
+    ```python
+    pip install paramiko
+    ```
 
 ##
 
