@@ -1,27 +1,39 @@
-import os
 import hashlib
+import math
 
 from pathlib import Path
+from collections import Counter
+from typing import Union
 
-def calculate_sha256(fpath : Path):
-    sha256_hash = hashlib.sha256()
-    with open(fpath, "rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
+def calculate_sha256(path: Path) -> str:
+    with path.open("rb") as f:
+        return hashlib.file_digest(f, "sha256").hexdigest()
 
-def shannon_entropy(data: bytes) -> float:
-    if not data:
+def shannon_entropy(data: Union[bytes, bytearray, memoryview]) -> float:
+    """
+    Compute Shannon entropy (in bits per byte) for a bytes-like object.
+
+    Entropy H = -∑ p(x) * log2(p(x)), where p(x) is the empirical probability
+    of each byte value in the input.
+
+    Returns:
+        float: entropy in [0.0, 8.0] for typical byte data.
+    """
+    # Normalize to a bytes-like, zero-copy view of 0..255 ints
+    if not isinstance(data, (bytes, bytearray, memoryview)):
+        raise TypeError("data must be bytes, bytearray, or memoryview")
+
+    mv = memoryview(data).cast("B")
+    n = len(mv)
+    if n == 0:
         return 0.0
-    # Frequency distribution of byte values (0-255)
-    freq = [0] * 256
-    for byte in data:
-        # Ensure `byte` is treated as an integer
-        freq[byte] += 1
-    # Calculate entropy
+
+    counts = Counter(mv)
+    inv_n = 1.0 / n
+
+    # Only iterate over symbols that actually occur
     entropy = 0.0
-    for count in freq:
-        if count > 0:
-            p = count / len(data)
-            entropy -= p * math.log2(p)
+    for c in counts.values():
+        p = c * inv_n
+        entropy -= p * math.log2(p)
     return entropy
