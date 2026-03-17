@@ -16,7 +16,7 @@ def log_max_memory(label="Max Memory Usage"):
 if __name__ == "__main__":
   start_memory_tracking()
 
-  # --- your script here ---
+  # --- sample script ---
   data = [i for i in range(1000000)]
   # ------------------------
 
