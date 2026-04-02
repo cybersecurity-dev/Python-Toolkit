@@ -1,3 +1,4 @@
+# concat two DataFrames horizontally (columns).
 def merge_on_primary_key(param_df1, param_df2, primary_key='sha256', based_on='First') -> pd.DataFrame | None:
     if param_df1 is None or len(param_df1) == 0: return param_df2.copy()
     if param_df2 is None or len(param_df2) == 0: return param_df1.copy()
@@ -14,4 +15,11 @@ def merge_on_primary_key(param_df1, param_df2, primary_key='sha256', based_on='F
     else:
         print("Argument 'based_on:' must be 'First' or 'Second'")
         return None
-  
+
+# concat Two DataFrames vertically (rows).
+def concat_and_fill(param_df1, param_df2, fill_missing_value=np.nan) -> pd.DataFrame | None:
+    if param_df1 is None or len(param_df1) == 0: return param_df2.copy()
+    if param_df2 is None or len(param_df2) == 0: return param_df1.copy()
+    df = pd.concat([param_df1, param_df2], axis=0, sort=False) 
+    df = df.fillna(fill_missing_value) # Fill missing values with the chosen value (default: np.nan)
+    return df
