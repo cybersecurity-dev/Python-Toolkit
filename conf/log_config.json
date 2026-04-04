@@ -1,0 +1,85 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s - %(levelname)s - %(name)s - %(module)s - %(funcName)s - L%(lineno)d - %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S"
+        }
+    },
+
+    "handlers": {
+        "debug_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": 10,
+            "formatter": "standard",
+            "filename": "logs/debug.log",
+            "maxBytes": 10485760,
+            "backupCount": 5
+        },
+
+        "info_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": 20,
+            "formatter": "standard",
+            "filename": "logs/output.log",
+            "maxBytes": 10485760,
+            "backupCount": 5
+        },
+
+        "feature_extraction_log": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": 25,
+            "formatter": "standard",
+            "filename": "logs/fe.log",
+            "maxBytes": 10485760,
+            "backupCount": 5
+        },
+
+        "ai_log": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": 35,
+            "formatter": "standard",
+            "filename": "logs/ai.log",
+            "maxBytes": 10485760,
+            "backupCount": 5
+        },
+
+        "error_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": 40,
+            "formatter": "standard",
+            "filename": "logs/error.log",
+            "maxBytes": 10485760,
+            "backupCount": 5
+        },
+
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": 30,
+            "formatter": "standard",
+            "stream": "ext://sys.stdout"
+        }
+    },
+
+    "loggers": {
+        "app_logger": {
+            "level": 10,
+            "handlers": ["debug_file", "info_file", "error_file", "console"],
+            "propagate": false
+        },
+
+        "ai_logger": {
+            "level": 35,
+            "handlers": ["ai_log"],
+            "propagate": false
+        },
+
+        "fe_logger": {
+            "level": 25,
+            "handlers": ["feature_extraction_log"],
+            "propagate": false
+        }
+    }
+}
