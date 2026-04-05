@@ -30,13 +30,21 @@
 * Linux
 
     ```bash
+    python3 -m pip --version && \
+    python3 -m venv .venv_poc && \
+    source .venv_poc/bin/activate && \
+    python3 -m pip install --upgrade pip && \
     XDG_CACHE_HOME=./cache_pip/ pip install -r requirements.txt
     ```
 
 * Windows 
     
     ```powershell
-
+    py -m pip --version
+    py -m venv .venv_poc
+    .venv_poc\Scripts\activate
+    py -m pip install --upgrade pip
+    XDG_CACHE_HOME=./cache_pip/ pip install -r requirements.txt
     ```
 
 ### UV
