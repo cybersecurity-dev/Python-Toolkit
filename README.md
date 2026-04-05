@@ -22,6 +22,49 @@
     <img src="https://github.com/cybersecurity-dev/cybersecurity-dev/blob/main/assets/bar.gif">
 </p>
 
+
+## Python Package Manager
+
+### PIP
+
+* Linux
+
+    ```bash
+    XDG_CACHE_HOME=./cache_pip/ pip install -r requirements.txt
+    ```
+
+* Windows 
+    
+    ```powershell
+
+    ```
+
+### UV
+
+* Linux
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh  && \
+    uv venv .venv_poc --python 3.15 --cache-dir ./.uv_cache && \
+    source .venv_poc/bin/activate && \
+    python --version && \
+    uv pip install -r requirements.txt --cache-dir ./.uv_cache
+    ```
+* Windows
+    ```powershell
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+    ```
+
+### CONDA
+
+* Linux
+    ```bash
+    
+    ```
+* Windows
+    ```powershell
+
+    ```
+
 ##
 
 ### Interacting with the OS
