@@ -15,11 +15,19 @@ logging.addLevelName(FE_LEVEL, "FE")
 # AI and FE :Custom logger methods 
 def ai(self, message, *args, **kwargs):
     if self.isEnabledFor(AI_LEVEL):
-        self._log(AI_LEVEL, message, args, **kwargs)
+        self._log(AI_LEVEL,
+                  message,
+                  args,
+                  **kwargs,
+                  stacklevel=2)
 
 def fe(self, message, *args, **kwargs):
     if self.isEnabledFor(FE_LEVEL):
-        self._log(FE_LEVEL, message, args, **kwargs)
+        self._log(FE_LEVEL,
+                  message,
+                  args,
+                  **kwargs,
+                  stacklevel=2)
 
 class LevelFilter(logging.Filter):
     def __init__(self, level):
