@@ -23,16 +23,3 @@ def concat_and_fill(param_df1, param_df2, fill_missing_value=np.nan) -> pd.DataF
     df = pd.concat([param_df1, param_df2], axis=0, sort=False) 
     df = df.fillna(fill_missing_value) # Fill missing values with the chosen value (default: np.nan)
     return df
-
-def find_mixed_type_columns(param_df: pd.DataFrame, print_columns : bool = True) -> dict:
-    mixed_columns = {}
-    for col in param_df.columns:
-        types = param_df[col].dropna().map(type).unique()
-        if len(types) > 1:
-            mixed_columns[col] = types
-    
-    # Optional printing
-    if print_columns:
-        for k, v in mixed_columns:
-            print(f"Column {k} : has {v} types")
-    return mixed_columns

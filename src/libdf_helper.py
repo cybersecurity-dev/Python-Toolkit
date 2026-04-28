@@ -73,3 +73,25 @@ def find_na_in_boolean_columns(param_df: pd.DataFrame, print_output : bool = Tru
             print("No boolean columns contain NA values.")
 
     return na_bool_cols
+
+def find_mixed_type_columns(param_df: pd.DataFrame, print_columns : bool = True) -> dict:
+    mixed_columns = {}
+    for col in param_df.columns:
+        types = param_df[col].dropna().map(type).unique()
+        if len(types) > 1:
+            mixed_columns[col] = types
+    
+    # Optional printing
+    if print_columns:
+        for k, v in mixed_columns:
+            print(f"Column {k} : has {v} types")
+    return mixed_columns
+
+def clean_all_mixed_int_str_columns(param_df: pd.DataFrame) -> pd.DataFrame:
+    for col in param_df.columns:
+        types = set(param_df[col].dropna().map(type))
+        if str in types and int in types:
+            param_df[col] = param_df[col].apply(
+                lambda x: "" if isinstance(x, int) and x == 0 else x
+            )
+    return param_df
