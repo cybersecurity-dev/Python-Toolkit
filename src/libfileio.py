@@ -24,7 +24,7 @@ def save_datasets(X_train, y_train, X_val, y_val, X_test, y_test, prefix : str =
     except Exception as e:
         print(f"Error saving datasets: {e}")
         return False
-
+#----------------------------------------------------------------------------------------------------------------------
 def load_datasets(prefix : str = "", date_str: str = "", load_dir : Path = './output'):
     exact_dir = ""
     if not prefix:
@@ -48,3 +48,18 @@ def load_datasets(prefix : str = "", date_str: str = "", load_dir : Path = './ou
     except Exception as e:
         print(f"Error loading datasets: {e}")
         return None, None, None
+#----------------------------------------------------------------------------------------------------------------------
+def csv2parquet_converter(csv_path: Path,
+                          column_names: list,
+                          output_path: Path) -> bool:
+    try:
+        df = pd.read_csv(csv_path, usecols=column_names)
+        if df.empty:
+            print("CSV loaded successfully but contains no rows.")
+            return False
+        df.to_parquet(output_path, engine="pyarrow", index=False)
+        return True
+    except Exception as e:
+        print(f"Error processing file: {e}")
+        return False
+#----------------------------------------------------------------------------------------------------------------------
