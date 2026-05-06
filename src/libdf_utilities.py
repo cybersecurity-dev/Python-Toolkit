@@ -23,3 +23,12 @@ def concat_and_fill(param_df1, param_df2, fill_missing_value=np.nan) -> pd.DataF
     df = pd.concat([param_df1, param_df2], axis=0, sort=False) 
     df = df.fillna(fill_missing_value) # Fill missing values with the chosen value (default: np.nan)
     return df
+
+def clean_all_mixed_int_str_columns(param_df: pd.DataFrame) -> pd.DataFrame:
+    for col in param_df.columns:
+        types = set(param_df[col].dropna().map(type))
+        if str in types and int in types:
+            param_df[col] = param_df[col].apply(
+                lambda x: "" if isinstance(x, int) and x == 0 else x
+            )
+    return param_df
